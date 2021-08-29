@@ -1,0 +1,99 @@
+openapi: 3.0.0
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+        price:
+          type: number
+        favorite:
+          type: boolean
+        ingredients:
+          type: array
+          items:
+            type: string
+          minItems: 1
+      required:
+        - name
+        - description
+        - price
+    ProductsListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Product'
+info:
+  title: product-info-service
+  description: Product service Serverless API build with AWS API Gateway
+  version: 0.0.1
+paths:
+  /products:
+    get:
+      operationId: getProductsList
+      summary: Get products list
+      description: Get the list of all the service products
+      tags:
+        - Product
+      parameters: []
+      responses:
+        '200':
+          description: Array of product objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductsListResponse'
+          headers:
+            Content-Type:
+              description: Content Type header
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              description: CORS allow origin header
+              schema:
+                type: string
+            Access-Control-Allow-Credentials:
+              description: CORS allow credentials header
+              schema:
+                type: boolean
+  '/products/{id}':
+    get:
+      operationId: getProductsById
+      summary: Get product by id
+      description: Get product information by its id
+      tags:
+        - Product
+      parameters:
+        - name: id
+          in: path
+          description: Product id
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Product object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          headers:
+            Content-Type:
+              description: Content Type header
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              description: CORS allow origin header
+              schema:
+                type: string
+            Access-Control-Allow-Credentials:
+              description: CORS allow credentials header
+              schema:
+                type: boolean
+servers:
+  - url: 'https://jg0ypwkz48.execute-api.eu-west-1.amazonaws.com/dev/'
+    description: Development env
