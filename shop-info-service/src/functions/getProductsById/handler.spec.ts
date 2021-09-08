@@ -15,7 +15,7 @@ describe('=> Unit testing getProductsById func', () => {
             return handler as never;
         });
 
-        main = (await import('./handler')).main;
+        main = (await import('./getProductsById')).main;
     });
 
     afterEach(() => {

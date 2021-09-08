@@ -6,18 +6,15 @@ import { middyfy } from '@libs/lambda';
 
 import schema from '../../resources/schema';
 import { srvsGetProductsList } from 'src/services/srvsGetProductsList';
-// import productList from '../../resources/productList.json';
 
-const getProductsList:
-    ValidatedEventAPIGatewayProxyEvent<typeof schema> = async () => {
+const getProductsList: ValidatedEventAPIGatewayProxyEvent<typeof schema>
+    = async () => {
         try {
             const productList = await srvsGetProductsList()
-            console.log("🔥🚀 ===> = ===> productList", productList);
 
-            if(!productList || productList.length === 0){
-                return formatJSONResponse(500,{
-                        status: 'server error',
-                        message: 'products not found'             
+            if (!productList || productList.length === 0) {
+                return formatJSONResponse(500, {
+                    message: 'server error'
                 })
             }
 
@@ -26,7 +23,7 @@ const getProductsList:
             });
 
         } catch (error) {
-            throw new Error(`Error in getAllProducts: ${error}`)
+            throw new Error(`error in getAllProducts: ${error} !`)
         }
     };
 

@@ -13,6 +13,10 @@ export default {
         price: {
             type: 'number'
         },
+        count: {
+            type: 'number'
+        },
+
         // favorite: {
         //     type: 'boolean'
         // },

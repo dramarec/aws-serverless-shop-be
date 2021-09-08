@@ -15,7 +15,7 @@ describe('Unit testing getProductsList func', () => {
             return handler as never;
         });
 
-        main = (await import('./handler')).main;
+        main = (await import('./getProductsList')).main;
     });
 
     afterEach(() => {

@@ -7,7 +7,7 @@ export const srvsGetProductsList = async () => {
     try {
         await client.connect();
         const { rows: result } = await client.query(`
-            select p.id, p.title, p.description, p.price, stocks.count
+            select p.id, p.title, p.description, p.image, p.price, stocks.count
             from products p 
             left outer join stocks
             on p.id = stocks.stock_id`
