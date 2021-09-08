@@ -1,7 +1,7 @@
 import { mocked } from 'ts-jest/utils';
 import { Handler } from 'aws-lambda';
 import { middyfy } from '@libs/lambda';
-import productList from '../../resources/productList.json'
+import productList from '../resources/productList.json'
 
 jest.mock('@libs/lambda');
 
@@ -15,7 +15,7 @@ describe('=> Unit testing getProductsById func', () => {
             return handler as never;
         });
 
-        main = (await import('./getProductsById')).main;
+        main = (await import('../../functions/getProductsById/getProductsById')).main;
     });
 
     afterEach(() => {

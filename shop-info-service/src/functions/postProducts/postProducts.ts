@@ -4,7 +4,7 @@ import { formatJSONResponse, ValidatedEventAPIGatewayProxyEvent } from '@libs/ap
 import { middyfy } from '@libs/lambda';
 
 import { srvsPostProducts } from 'src/services/srvsPostProducts';
-import schema from '../../resources/schema';
+import schema from '../schema';
 
 const postProducts: ValidatedEventAPIGatewayProxyEvent<typeof schema>
     = async (event) => {

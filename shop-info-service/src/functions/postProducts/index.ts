@@ -1,5 +1,5 @@
 import { handlerPath } from '@libs/handlerResolver';
-import schema from '../../resources/schema';
+import schema from '../schema';
 
 export default {
     handler: `${handlerPath(__dirname)}/postProducts.main`,

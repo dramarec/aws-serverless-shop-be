@@ -4,16 +4,17 @@ import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/apiGateway';
 import { formatJSONResponse } from '@libs/apiGateway';
 import { middyfy } from '@libs/lambda';
 
-import productList from '../../resources/productList.json';
-import schema from '../../resources/schema';
+import schema from '../schema';
+import { srvsGetProductsById } from 'src/services/srvsGetProductsById';
 
 const getProductsById: ValidatedEventAPIGatewayProxyEvent<typeof schema>
     = async (event) => {
         try {
             const { id } = event.pathParameters
-            const productById = productList.find(el => el.id === id);
 
-            if (!productById) {
+            const productById = await srvsGetProductsById(id);
+
+            if (!productById || productById.length === 0) {
                 return formatJSONResponse(404, {
                     status: 'not found',
                     message: `product with id:${id} not found`
@@ -25,7 +26,7 @@ const getProductsById: ValidatedEventAPIGatewayProxyEvent<typeof schema>
             });
 
         } catch (error) {
-            throw new Error(`Error in getProductsById: ${error}`)
+            throw new Error(`error in getProductsById: ${error} !`)
         }
 
     };
