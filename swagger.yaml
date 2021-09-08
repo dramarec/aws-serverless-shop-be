@@ -4,7 +4,7 @@ components:
     Product:
       type: object
       properties:
-        name:
+        title:
           type: string
         description:
           type: string
@@ -12,23 +12,14 @@ components:
           type: string
         price:
           type: number
-        favorite:
-          type: boolean
-        ingredients:
-          type: array
-          items:
-            type: string
-          minItems: 1
-      required:
-        - name
-        - description
-        - price
+        count:
+          type: number
     ProductsListResponse:
       type: array
       items:
         $ref: '#/components/schemas/Product'
 info:
-  title: product-info-service
+  title: product-service
   description: Product service Serverless API build with AWS API Gateway
   version: 0.0.1
 paths:
@@ -47,6 +38,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductsListResponse'
+        '500': 
+           description: server error
+           
+           headers:
+            Content-Type:
+              description: Content Type header
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              description: CORS allow origin header
+              schema:
+                type: string
+            Access-Control-Allow-Credentials:
+              description: CORS allow credentials header
+              schema:
+                type: boolean
+    post:
+      tags:
+        - Product
+      operationId: postProducts
+      summary: Create new product
+      description: Get the list of all the service products
+      parameters:
+        - in: query
+          name: body
+          description: Parameters in json for creating new product
+          required: true
+          schema:
+            type: object
+            properties:
+              postProduct:
+                $ref: '#/components/schemas/ProductsListResponse'
+      responses:
+        '200':
+          description: Array of product objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductsListResponse'
+        '400':
+          description:  not valid request body         
+        '500': 
+          description: server error  
+
           headers:
             Content-Type:
               description: Content Type header
@@ -60,7 +95,8 @@ paths:
               description: CORS allow credentials header
               schema:
                 type: boolean
-  '/products/{id}':
+           
+  /products/{id}:
     get:
       operationId: getProductsById
       summary: Get product by id
@@ -77,10 +113,16 @@ paths:
       responses:
         '200':
           description: Product object
+          
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Product'
+        '404':
+          description: product with id not found 
+        '500': 
+          description: server error  
+          
           headers:
             Content-Type:
               description: Content Type header
@@ -95,5 +137,5 @@ paths:
               schema:
                 type: boolean
 servers:
-  - url: 'https://jg0ypwkz48.execute-api.eu-west-1.amazonaws.com/dev/'
+  - url: 'https://jg0ypwkz48.execute-api.eu-west-1.amazonaws.com/dev'
     description: Development env
