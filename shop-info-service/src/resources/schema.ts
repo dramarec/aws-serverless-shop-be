@@ -1,7 +1,7 @@
 export default {
     type: "object",
     properties: {
-        name: {
+        title: {
             type: 'string'
         },
         description: {
@@ -13,17 +13,17 @@ export default {
         price: {
             type: 'number'
         },
-        favorite: {
-            type: 'boolean'
-        },
-        ingredients: {
-            type: 'array',
-            items: {
-                type: 'string'
-            },
-            minItems: 1
-        }
+        // favorite: {
+        //     type: 'boolean'
+        // },
+        // ingredients: {
+        //     type: 'array',
+        //     items: {
+        //         type: 'string'
+        //     },
+        //     minItems: 1
+        // }
 
     },
-    required: ['name', 'description', 'price']
+    required: ['name', 'description', 'price', 'count']
 } as const;

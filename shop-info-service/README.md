@@ -2,8 +2,10 @@
 
 ```
 sls deploy
+
 serverless invoke local --function getProductsList
-serverless invoke local -p ./src/resources/test.json -f getProductsById
+serverless invoke local -p ./src/resources/test-id.json -f getProductsById
+serverless invoke local -p ./src/resources/test-post.json -f postProducts
 ```
 [cloudfront](https://d2yp1cw1im3tzr.cloudfront.net/)
 

@@ -12,6 +12,7 @@ const serverlessConfiguration: AWS = {
       includeModules: true,
     },
   },
+  useDotenv: true,
   plugins: ['serverless-webpack'],
   provider: {
     name: 'aws',

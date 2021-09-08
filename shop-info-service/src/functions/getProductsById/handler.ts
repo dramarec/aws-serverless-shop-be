@@ -7,8 +7,9 @@ import { middyfy } from '@libs/lambda';
 import productList from '../../resources/productList.json';
 import schema from '../../resources/schema';
 
-const getProductsById:
-    ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
+const getProductsById
+    : ValidatedEventAPIGatewayProxyEvent<typeof schema> 
+    = async (event) => {
         try {
             const { id } = event.pathParameters
             const productById = productList.find(el => el.id === id);
