@@ -17,11 +17,8 @@ const getProductsList: ValidatedEventAPIGatewayProxyEvent<typeof schema>
                     message: 'server error'
                 })
             }
-
-            return formatJSONResponse(200, {
-                productList
-            });
-
+            
+            return formatJSONResponse(200, { productList });
         } catch (error) {
             throw new Error(`error in getAllProducts: ${error} !`)
         }

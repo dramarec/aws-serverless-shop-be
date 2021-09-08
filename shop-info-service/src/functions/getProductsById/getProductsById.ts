@@ -9,6 +9,7 @@ import { srvsGetProductsById } from 'src/services/srvsGetProductsById';
 
 const getProductsById: ValidatedEventAPIGatewayProxyEvent<typeof schema>
     = async (event) => {
+        console.log("🔥🚀 ===> getProductsById ===> event:", event);
         try {
             const { id } = event.pathParameters
 
@@ -16,19 +17,15 @@ const getProductsById: ValidatedEventAPIGatewayProxyEvent<typeof schema>
 
             if (!productById || productById.length === 0) {
                 return formatJSONResponse(404, {
-                    status: 'not found',
                     message: `product with id:${id} not found`
                 });
             }
 
-            return formatJSONResponse(200, {
-                productById
-            });
+            return formatJSONResponse(200, { productById });
 
         } catch (error) {
             throw new Error(`error in getProductsById: ${error} !`)
         }
-
     };
 
 export const main = middyfy(getProductsById)

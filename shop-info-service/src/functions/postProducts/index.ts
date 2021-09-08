@@ -1,4 +1,5 @@
 import { handlerPath } from '@libs/handlerResolver';
+import { AWSFunction } from '@libs/lambda';
 import schema from '../schema';
 
 export default {
@@ -17,4 +18,4 @@ export default {
             }
         }
     ]
-}
+} as AWSFunction;

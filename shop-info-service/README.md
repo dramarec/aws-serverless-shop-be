@@ -4,8 +4,8 @@
 sls deploy
 
 serverless invoke local --function getProductsList
-serverless invoke local -p ./src/resources/test-id.json -f getProductsById
-serverless invoke local -p ./src/resources/test-post.json -f postProducts
+serverless invoke local -p ./src/test/resources/test-id.json -f getProductsById
+serverless invoke local -p ./src/test/resources/test-post.json -f postProducts
 ```
 [cloudfront](https://d2yp1cw1im3tzr.cloudfront.net/)
 

@@ -27,8 +27,8 @@ export const srvsPostProducts = async (value) => {
             'select p.id, p.title, p.description, p.image, p.price, stocks.count from products p left outer join stocks on p.id = stocks.stock_id where p.id = $1',
             [idProduct]
         );
-        
         console.log("🔥🚀 ===> srvsPostProducts ===> result", result);
+
         await client.query('COMMIT')
         return result
     } catch (error) {

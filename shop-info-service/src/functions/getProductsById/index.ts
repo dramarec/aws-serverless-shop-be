@@ -1,4 +1,5 @@
 import { handlerPath } from '@libs/handlerResolver';
+import { AWSFunction } from '@libs/lambda';
 
 export default {
     handler: `${handlerPath(__dirname)}/getProductsById.main`,
@@ -18,4 +19,4 @@ export default {
             }
         }
     ]
-}
+} as AWSFunction;

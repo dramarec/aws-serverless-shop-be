@@ -1,8 +1,8 @@
 {
   "body": {
-    "title": "Best shop name product",
-    "count": 4,
+    "count": 2,
     "price": 10,
-    "description": "Best shop description product"
+    "description": "Best shop description",
+    "title": "Best shop name product"
   }
 }

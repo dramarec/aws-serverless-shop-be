@@ -16,18 +16,6 @@ export default {
         count: {
             type: 'number'
         },
-
-        // favorite: {
-        //     type: 'boolean'
-        // },
-        // ingredients: {
-        //     type: 'array',
-        //     items: {
-        //         type: 'string'
-        //     },
-        //     minItems: 1
-        // }
-
     },
-    required: ['name', 'description', 'price', 'count']
+    required: ['title', 'description', 'price', 'count']
 } as const;

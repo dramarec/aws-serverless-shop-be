@@ -9,7 +9,7 @@ export const dbOptions: ClientConfig = {
     user: PG_USERNAME,
     password: PG_PASSWORD,
     ssl: {
-        rejectUnauthorized: false // to avoid warring in this example
+        rejectUnauthorized: false 
     },
-    connectionTimeoutMillis: 5000 // time in millisecond for termination of the database query
+    connectionTimeoutMillis: 5000
 };

@@ -12,9 +12,9 @@ export const srvsGetProductsList = async () => {
             left outer join stocks
             on p.id = stocks.stock_id`
         );
+        
         console.log("🔥🚀 ===> srvsGetProductsList ===> result", result);
         return result;
-
     } catch (error) {
         throw new Error('=> srvsGetProductsList error...');
     } finally {

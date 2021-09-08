@@ -2,7 +2,6 @@ import { Client } from 'pg';
 import { dbOptions } from '@libs/dbOptions';
 
 export const srvsGetProductsById = async (id) => {
-    console.log("🔥🚀 ===> srvsGetProductsById ===> id", id);
     const client = new Client(dbOptions);
     
     try {
@@ -15,6 +14,7 @@ export const srvsGetProductsById = async (id) => {
             where p.id='${id}'`
         );
 
+        console.log("🔥🚀 ===> srvsGetProductsById ===> result", result);
         return result;
     } catch (error) {
         throw new Error(`=> srvsGetProductsById: ${error}...`);
