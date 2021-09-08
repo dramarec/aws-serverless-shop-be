@@ -3,6 +3,9 @@
   "compilerOptions": {
     "lib": ["ESNext"],
     "moduleResolution": "node",
+    "module": "commonjs",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "removeComments": true,

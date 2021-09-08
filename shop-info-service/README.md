@@ -1,5 +1,12 @@
 # Serverless - AWS Node.js Typescript
 
+```
+sls deploy
+serverless invoke local --function getProductsList
+serverless invoke local -p ./src/resources/test.json -f getProductsById
+```
+[cloudfront](https://d2yp1cw1im3tzr.cloudfront.net/)
+
 This project has been generated using the `aws-nodejs-typescript` template from the [Serverless framework](https://www.serverless.com/).
 
 For detailed instructions, please refer to the [documentation](https://www.serverless.com/framework/docs/providers/aws/).
