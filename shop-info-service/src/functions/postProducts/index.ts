@@ -1,19 +1,18 @@
 import { handlerPath } from '@libs/handlerResolver';
 import { AWSFunction } from '@libs/lambda';
+import schema from '../schema';
 
 export default {
-    handler: `${handlerPath(__dirname)}/getProductsById.main`,
+    handler: `${handlerPath(__dirname)}/postProducts.main`,
     events: [
         {
             http: {
-                method: 'get',
-                path: 'products/{id}',
+                method: 'post',
+                path: 'products',
                 cors: true,
                 request: {
-                    parameters: {
-                        paths: {
-                            id: true
-                        }
+                    schemas: {
+                        'application/json': schema
                     }
                 }
             }

@@ -1,7 +1,8 @@
 import { handlerPath } from '@libs/handlerResolver';
+import { AWSFunction } from '@libs/lambda';
 
 export default {
-    handler: `${handlerPath(__dirname)}/handler.main`,
+    handler: `${handlerPath(__dirname)}/getProductsList.main`,
     events: [
         {
             http: {
@@ -11,4 +12,4 @@ export default {
             }
         }
     ]
-}
+}as AWSFunction;

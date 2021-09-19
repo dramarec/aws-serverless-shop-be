@@ -14,7 +14,8 @@ export const formatJSONResponse = (
         statusCode,
         headers: {
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Credentials': true,
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Methods': '*'
         },
         body: JSON.stringify(response)
     }
