@@ -3,12 +3,10 @@ import * as AWS from "aws-sdk";
 
 import { formatJSONResponse } from '@libs/apiGateway';
 import { middyfy } from '@libs/lambda';
-
+import { BUCKET, PATH } from '@libs/constants';
 
 const importProductsFile = async (event) => {
-
-    const BUCKET = process.env.BUCKET_NAME;
-    const PATH = process.env.CATALOG_PATH;
+    console.log("🔥🚀 importProductsFile ===> event:", event);
 
     try {
         const fileName = event.queryStringParameters.name;
@@ -33,11 +31,12 @@ const importProductsFile = async (event) => {
         const result = await S3.getSignedUrlPromise("putObject", params)
 
         const newRes = formatJSONResponse(result)
+        console.log("🔥🚀 importProductsFile ===> newRes", newRes);
 
         return newRes
 
     } catch (error) {
-        console.log("🔥🚀 ===> importProductsFile ===> error", error);
+        console.log("🔥🚀 importProductsFile ===> error", error);
         return formatJSONResponse({
             message: error.message,
         }, 500)

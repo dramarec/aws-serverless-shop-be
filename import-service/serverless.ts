@@ -1,9 +1,11 @@
 import type { AWS } from '@serverless/typescript';
-
+import { BUCKET } from '@libs/constants';
+console.log("🔥🚀 ===> BUCKET_NAME", BUCKET);
 import importProductsFile from '@functions/importProductsFile';
+import importFileParser from '@functions/importFileParser';
 
 const serverlessConfiguration: AWS = {
-  service: 'lesson5-import-service',
+  service: '${env:SERVICE_NAME}',
   frameworkVersion: '2',
   useDotenv: true,
   custom: {
@@ -37,20 +39,20 @@ const serverlessConfiguration: AWS = {
         Effect: 'Allow',
         Action: 's3:ListBucket',
         Resource: [
-          'arn:aws:s3:::drmrc-rsschool-node-in-aws-s3'
+          'arn:aws:s3:::${env:BUCKET_NAME}'
         ]
       },
       {
         Effect: 'Allow',
         Action: 's3:*',
         Resource: [
-          'arn:aws:s3:::drmrc-rsschool-node-in-aws-s3/*'
+          'arn:aws:s3:::${env:BUCKET_NAME}/*'
         ]
       },
     ]
   },
   // import the function via paths
-  functions: { importProductsFile },
+  functions: { importProductsFile, importFileParser },
 };
 
 module.exports = serverlessConfiguration;

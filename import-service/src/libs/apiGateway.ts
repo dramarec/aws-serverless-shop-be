@@ -10,7 +10,6 @@ export const formatJSONResponse = (
   response: Record<string, unknown> | string,
   statusCode: number = 200,
 ) => {
-  console.log("🔥🚀 ===> response", response);
   return {
     headers: {
       'Access-Control-Allow-Origin': '*',
