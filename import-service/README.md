@@ -1,0 +1,6 @@
+# Serverless - AWS Node.js Typescript
+
+### Task 5
+https://98c5xo2he2.execute-api.eu-west-1.amazonaws.com/dev/import 
+
+url: "https://drmrc-rsschool-node-in-aws-s3.s3.eu-west-1.amazonaws.com/uploaded/products.csv?AWSAccessKeyId=ASIA2XARQVCHYJ7GCXUX&Content-Type=text%2Fcsv&Expires=1632322245&Signature=7Q8UXq4%2Fszm44e42lNrTUaFIMGI%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCWV1LXdlc3QtMSJIMEYCIQDLjv1GvwPtUlFaV%2BylE%2F9a8XHI%2F13%2BXrtdFnAZaZGiXgIhANKTMiW5UzLwq2nGZDQvZ4%2BylZVN%2F1O1coCSqtJ0F1T7KrICCBgQABoMNzM2NjIzNjM0NTc1IgyEgdaFngbQfypLtnwqjwLwUClskEGFutO9w0qMBJTR%2FleNufyCq68%2FcYz2NHWCS4hWGoNqzUL8b3QmiboNVzA248du6GCKw%2BD5f2Bf1%2BUJj09g%2BzZh01sXicmF55JouS7cIDxrMVl1PkdCNsy2JUSDWGdpw2LQ%2Fy8DYkzN80N7zgEjt%2FEcN%2FW5R247nFlPMtwmhzd3dqt49qry%2Fh2cLITIpjsOgvPVM2UgfUpQ7e6lMnD9VjO%2FDCTGMBohFZnCJCFIb%2FuTlLdixVYpc93ck78JZPev2ItCt4yk0hZvRTEBtQRZmLhAfNCXHyUvDUpAvmqm%2FCwDXSRiqVKtzqu9FfKjEd4M%2FXn4PVligyblVnqHDhysEhfsZmqyWgCbbu3lMIiFrYoGOpkBurP%2B%2FSvHyfhHXesAj%2Bn%2FYDt4kVtZjvTeE3WttSYadhAoB7rMnBaUa2vWPG4A7L9ry8dCAPRfZxDkb4mo0IDwm%2FL4A1Bwt0RSXNB1s36sOQyiBB4H9pf3ZcToD3RvmTUBSBFkocZWdxjtSfF4TTQ0%2FLdN0h9rd%2FtIPfFD2YC0609VYGIJxbDJTHhuve2HOvAmi55iwDEHPlV5"
