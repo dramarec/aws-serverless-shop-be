@@ -16,14 +16,17 @@ const getProductsById: ValidatedEventAPIGatewayProxyEvent<typeof schema>
             const productById = await srvsGetProductsById(id);
 
             if (!productById || productById.length === 0) {
-                return formatJSONResponse(404, {
+                return formatJSONResponse({
                     message: `product with id:${id} not found`
-                });
+                }, 404);
             }
 
-            return formatJSONResponse(200, { productById });
+            return formatJSONResponse({ productById }, 200);
 
         } catch (error) {
+            formatJSONResponse({
+                message: error.message,
+            }, 500)
             throw new Error(`error in getProductsById: ${error} !`)
         }
     };

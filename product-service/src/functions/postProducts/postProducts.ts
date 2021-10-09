@@ -22,23 +22,26 @@ const postProducts
             }
 
             if (!title || title === ' ' || title === undefined) {
-                return formatJSONResponse(400, { message: 'invalid title' });
+                return formatJSONResponse({ message: 'invalid title' }, 400);
             }
             if (!description || description === ' ' || description === undefined) {
-                return formatJSONResponse(400, { message: 'invalid description' });
+                return formatJSONResponse({ message: 'invalid description' }, 400);
             }
             if (!price || typeof price !== 'number' || price === undefined) {
-                return formatJSONResponse(400, { message: 'invalid price' });
+                return formatJSONResponse({ message: 'invalid price' }, 400);
             }
             if (!count || typeof count !== 'number' || count === undefined || count < 1) {
-                return formatJSONResponse(400, { message: 'invalid count' });
+                return formatJSONResponse({ message: 'invalid count' }, 400);
             }
 
             const result = await srvsPostProducts(value)
 
-            return formatJSONResponse(200, result);
+            return formatJSONResponse(result, 200);
 
         } catch (error) {
+            formatJSONResponse({
+                message: error.message,
+            }, 500)
             throw new Error(`error in postProducts: ${error} !`)
         }
     }

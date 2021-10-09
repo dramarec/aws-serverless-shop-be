@@ -3,15 +3,17 @@ import * as AWS from "aws-sdk";
 import * as csvParser from 'csv-parser'
 
 import { BUCKET } from '@libs/constants';
+console.log("🔥🚀 ===> BUCKET", BUCKET);
 import { formatJSONResponse } from '@libs/apiGateway';
 import { middyfy } from '@libs/lambda';
 
 const importFileParser = async (event) => {
     console.log("🔥🚀 importFileParser ===> event:", event);
 
-    try {
-        const S3 = new AWS.S3({ region: "eu-west-1" })
+    const S3 = new AWS.S3({ region: "eu-west-1" })
+    const sqs = new AWS.SQS()
 
+    try {
         const records = event.Records;
 
         for (const record of records) {
@@ -23,7 +25,19 @@ const importFileParser = async (event) => {
 
             s3Stream
                 .pipe(csvParser())
-                .on('data', data => console.log(data))
+                .on('data', data => {
+                    console.log('product parsed from csv: ', data)
+                    sqs.sendMessage({
+                        QueueUrl: process.env.SQS_URL,
+                        MessageBody: JSON.stringify(data)
+                    }, (error, data) => {
+                        if (error) {
+                            console.log('Error in SQS send message: ', error)
+                        } else {
+                            console.log('Data in SQS send message: ', data)
+                        }
+                    })
+                })
                 .on('end', async () => {
                     console.log(`🔥🚀 copy from => ${BUCKET}/${key}`)
 
@@ -44,6 +58,12 @@ const importFileParser = async (event) => {
                 });
 
         }
+
+        return formatJSONResponse({
+            response: {
+                message: 'Data has been sent to SQS.'
+            },
+        });
 
     } catch (error) {
         console.log("🔥🚀 importFileParser ===> error", error);

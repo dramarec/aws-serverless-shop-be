@@ -7,10 +7,10 @@ export const srvsPostProducts = async (value) => {
     const index = Math.ceil(Math.random() * (100 - 1) + 1)
     const image = `https://source.unsplash.com/random?sig=${index}`
 
+    await client.connect();
+    await client.query('BEGIN')
+    
     try {
-        await client.connect();
-        await client.query('BEGIN')
-
         const resultProduct = await client.query(
             'insert into products(title, description, image, price) values($1, $2, $3, $4) returning id',
             [title, description, image, price]

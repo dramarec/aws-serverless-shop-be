@@ -1,8 +1,6 @@
 import type { AWS } from '@serverless/typescript';
 
-import getProductsById from '@functions/getProductsById';
-import getProductsList from '@functions/getProductsList';
-import postProducts from '@functions/postProducts';
+import * as functions from '@functions/index'
 
 const serverlessConfiguration: AWS = {
   service: 'shop-info-service',
@@ -27,6 +25,15 @@ const serverlessConfiguration: AWS = {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
     },
+    iamRoleStatements: [
+      {
+        Effect: 'Allow',
+        Action: 'sns:*',
+        Resource: {
+          'Ref': 'SNSTopic'
+        },
+      },
+    ],
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       PG_HOST: process.env.PG_HOST,
@@ -34,10 +41,51 @@ const serverlessConfiguration: AWS = {
       PG_DATABASE: process.env.PG_DATABASE,
       PG_USERNAME: process.env.PG_USERNAME,
       PG_PASSWORD: process.env.PG_PASS,
+      SNS_ARN: {
+        Ref: 'SNSTopic',
+      },
     },
     lambdaHashingVersion: '20201221',
   },
-  functions: { getProductsList, getProductsById, postProducts },
+  resources: {
+    Resources: {
+      SNSTopic: {
+        Type: 'AWS::SNS::Topic',
+        Properties: {
+          TopicName: 'createProductTopic',
+        },
+      },
+      SNSSubscription: {
+        Type: 'AWS::SNS::Subscription',
+        Properties: {
+          Endpoint: 'dramarecsky@gmail.com',
+          Protocol: 'email',
+          TopicArn: {
+            Ref: 'SNSTopic',
+          },
+          FilterPolicy: {
+            price: [{ numeric: ['>', 20] }],
+            success: ['true'],
+          },
+        },
+      },
+      SNSSubscription2: {
+        Type: 'AWS::SNS::Subscription',
+        Properties: {
+          Endpoint: 'dramarectest@gmail.com',
+          Protocol: 'email',
+          TopicArn: {
+            Ref: 'SNSTopic',
+          },
+          FilterPolicy: {
+            price: [{ numeric: ['<', 20] }],
+            success: ['false'],
+          },
+        },
+      },
+    },
+  },
+  functions
 };
 
 module.exports = serverlessConfiguration;
