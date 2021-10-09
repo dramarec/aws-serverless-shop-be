@@ -1,8 +1,7 @@
 import type { AWS } from '@serverless/typescript';
-import { BUCKET } from '@libs/constants';
-console.log("🔥🚀 ===> BUCKET_NAME", BUCKET);
-import importProductsFile from '@functions/importProductsFile';
+
 import importFileParser from '@functions/importFileParser';
+import importProductsFile from '@functions/importProductsFile';
 
 const serverlessConfiguration: AWS = {
   service: '${env:SERVICE_NAME}',
@@ -32,6 +31,10 @@ const serverlessConfiguration: AWS = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+
+      SQS_URL: {
+        Ref: 'catalogItemsQueue',
+      },
     },
     lambdaHashingVersion: '20201221',
     iamRoleStatements: [
@@ -49,9 +52,33 @@ const serverlessConfiguration: AWS = {
           'arn:aws:s3:::${env:BUCKET_NAME}/*'
         ]
       },
-    ]
+      {
+        Effect: 'Allow',
+        Action: 'sqs:*',
+        Resource: [{
+          'Fn::GetAtt': ['catalogItemsQueue', 'Arn']
+        }]
+      },
+    ],
   },
-  // import the function via paths
+  resources: {
+    Resources: {
+      catalogItemsQueue: {
+        Type: 'AWS::SQS::Queue',
+        Properties: {
+          QueueName: 'create-catalogItemsQueue',
+        },
+      },
+    },
+    Outputs: {
+      SQSArn: {
+        Value: {
+          'Fn::GetAtt': ['catalogItemsQueue', 'Arn'],
+        },
+      },
+    },
+  },
+
   functions: { importProductsFile, importFileParser },
 };
 

@@ -6,3 +6,13 @@ export default interface ICards {
     price: number
     count: number
 }
+
+// type Record = { body: string }
+// type Event = { Records: Record[] }
+interface Record {
+    body: string
+}
+
+export interface IProp {
+    Records: Record[]
+}

@@ -13,13 +13,16 @@ const getProductsList: ValidatedEventAPIGatewayProxyEvent<typeof schema>
             const productList = await srvsGetProductsList()
 
             if (!productList || productList.length === 0) {
-                return formatJSONResponse(500, {
+                return formatJSONResponse({
                     message: 'server error'
-                })
+                }, 500)
             }
-            
-            return formatJSONResponse(200, { productList });
+
+            return formatJSONResponse({ productList }, 200);
         } catch (error) {
+            formatJSONResponse({
+                message: error.message,
+            }, 500)
             throw new Error(`error in getAllProducts: ${error} !`)
         }
     };
